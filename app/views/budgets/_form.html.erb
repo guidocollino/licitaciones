@@ -1,0 +1,153 @@
+<%= form_for @budget, :html => { :class => 'form-horizontal' } do |f| %>
+<fieldset>
+	<legend>
+		Datos generales
+	</legend>
+	<div class="row-fluid">
+		<div class="span5">
+			<div class="control-group">
+				<%= f.label "Cliente", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :customer, :class => 'text_field input-xlarge' %>
+				</div>
+			</div>
+
+		</div>
+		<div class="span3">
+			<div class="control-group">
+				<%= f.label "Fecha", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :date, :id => 'datepicker', :class => 'input-small' %>
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="control-group">
+				<%= f.label "Markup", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.number_field :general_markup, :class => 'number_field input-mini' %> %
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="control-group">
+				<%= f.label "Calle", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :street, :class => 'text_field' %>
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="control-group">
+				<%= f.label "Exp N°", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :file_number, :class => 'text_field' %>
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="control-group">
+				<%= f.label "Man oferta", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :offer, :class => 'text_field' %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="control-group">
+				<%= f.label "Localidad", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :locality, :class => 'text_field' %>
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="control-group">
+				<%= f.label "L. privada N°", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :private_number, :class => 'text_field' %>
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="control-group">
+				<%= f.label "Plazo/entrega", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :delivery, :class => 'text_field' %>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row-fluid">
+		<div class="span4">
+			<div class="control-group">
+				<%= f.label "Con pago", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :with_payment, :class => 'text_field' %>
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="control-group">
+				<%= f.label "Apertura", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :opening, :class => 'text_field' %>
+				</div>
+			</div>
+		</div>
+		<div class="span4">
+			<div class="control-group">
+				<%= f.label "Lugar/entrega", :class => 'control-label' %>
+				<div class="controls">
+					<%= f.text_field :place_of_delivery, :class => 'text_field' %>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</fieldset>
+<fieldset>
+	<legend>
+		Items
+	</legend>
+	<div class="row-fluid">
+		<div class="span1">
+			Item
+		</div>
+		<div class="span1">
+			Cantidad
+		</div>
+		<div class="span6">
+			Detalle
+		</div>
+		<div class="span1">
+			Unitario
+		</div>
+		<div class="span1">
+			Importe
+		</div>
+		<div class="span2">
+			Markup
+		</div>
+	</div>
+	<%= f.fields_for :budget_items do |f_item| %>
+	<%= render :partial => "budget_item_fields", :locals => {:f => f_item} %>
+	<% end %>
+
+	<span class="button-adds"> <%= link_to_add_fields content_tag(:i,nil, :class => "icon-plus-sign") + " item", f, :budget_items %> </span>
+
+</fieldset>
+<div class="form-actions">
+	<%= f.submit "Guardar", :class => 'btn btn-primary' %>
+	<%= f.submit "Guardar y Salir", :class => 'btn btn btn-inverse' %>
+	<%= link_to "Salir",
+	budgets_path, :class => 'btn' %>
+</div>
+<% end %>

@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  customer: MyString
+  street: MyString
+  locality: MyString
+  with_payment: MyString
+  file_number: MyString
+  private_number: MyString
+  opening: MyString
+  date: 2012-11-30
+  offer: MyString
+  delivery: MyString
+  place_of_delivery: MyString
+  general_markup: 1
+
+two:
+  customer: MyString
+  street: MyString
+  locality: MyString
+  with_payment: MyString
+  file_number: MyString
+  private_number: MyString
+  opening: MyString
+  date: 2012-11-30
+  offer: MyString
+  delivery: MyString
+  place_of_delivery: MyString
+  general_markup: 1

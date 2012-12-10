@@ -1,0 +1,38 @@
+<%- model_class = Budget -%>
+<div class="page-header">
+  <h3>Presupuestos</h3>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Cliente</th>
+      <th>Número de file</th>
+      <th>Nro privado</th>
+      <th>Fecha</th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @budgets.each do |budget| %>
+      <tr>
+        <td><%= budget.customer %></td>
+        <td><%= budget.file_number %></td>
+        <td><%= budget.private_number %></td>
+        <td><%= budget.date %></td>
+        <td>
+          <%= link_to t(:edit, :default => t("helpers.links.edit")),
+                      edit_budget_path(budget), :class => 'btn btn-mini' %>
+          <%= link_to t(:destroy, :default => t("helpers.links.destroy")),
+                      budget_path(budget),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t(:new, :default => t("helpers.links.new")),
+            new_budget_path,
+            :class => 'btn btn-custom' %>
