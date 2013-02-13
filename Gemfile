@@ -8,7 +8,8 @@ gem 'rails', '3.2.8'
 gem 'mysql2'
 #gem 'activerecord-sqlite3-adapter'
 
-
+gem "cancan"
+gem 'devise'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -39,6 +40,7 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 gem 'capistrano'
+gem 'rvm-capistrano'
 
 # To use debugger
 # gem 'debugger'

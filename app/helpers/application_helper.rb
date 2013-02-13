@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def link_to_remove_fields(name, f)
     f.hidden_field(:_delete) + link_to_function(name, "remove_fields(this)")
   end
@@ -12,4 +11,12 @@ module ApplicationHelper
     link_to_function(name, "add_fields(this, \"#{association}\", \"#{escape_javascript(fields)}\")")
   end
 
+  def sanitized_object_name(object_name)
+    temp_result = object_name.gsub(/(\]\[)/,"_")
+    temp_result.gsub(/[\]||\[]/,"_")
+  end
+
+  def form_tag_id(object_name, method_name)
+    "#{sanitized_object_name(object_name.to_s) + method_name}"
+  end
 end

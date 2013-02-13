@@ -25,7 +25,7 @@
 			<div class="control-group">
 				<%= f.label "Markup", :class => 'control-label' %>
 				<div class="controls">
-					<%= f.number_field :general_markup, :class => 'number_field input-mini' %> %
+					<%= f.number_field :general_markup, :class => 'number_field input-mini', :onchange => "recalculate_amounts();" %> %
 				</div>
 			</div>
 		</div>
@@ -131,17 +131,20 @@
 			Unitario
 		</div>
 		<div class="span1">
-			Importe
+			Markup
 		</div>
 		<div class="span2">
-			Markup
+			Importe
 		</div>
 	</div>
 	<%= f.fields_for :budget_items do |f_item| %>
 	<%= render :partial => "budget_item_fields", :locals => {:f => f_item} %>
 	<% end %>
 
-	<span class="button-adds"> <%= link_to_add_fields content_tag(:i,nil, :class => "icon-plus-sign") + " item", f, :budget_items %> </span>
+	<div class="row-fluid">
+		<span class="span12 button-adds" id="buttons"> <%= link_to_add_fields content_tag(:i,nil, :class => "icon-plus-sign") + " item", f, :budget_items %> </span>
+	</div>
+	
 
 </fieldset>
 <div class="form-actions">

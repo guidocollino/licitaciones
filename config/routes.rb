@@ -1,4 +1,8 @@
 FerreteriaScabuzzo::Application.routes.draw do
+  get "login/index"
+
+  devise_for :users
+
   resources :budgets
   resources :budget_items
 
@@ -51,7 +55,7 @@ FerreteriaScabuzzo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'budgets#index'
+   root :to => 'login#index'
 
   # See how all your routes lay out with "rake routes"
 

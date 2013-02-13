@@ -6,6 +6,7 @@ class CreateBudgetItems < ActiveRecord::Migration
       t.integer :markup
       t.text :detail
       t.integer :number
+      t.float :import
       t.references :budget
 
       t.timestamps

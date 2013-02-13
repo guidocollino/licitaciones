@@ -1,26 +1,31 @@
-
 <div class="row-fluid">
 	<div class="span1">
-		<%= f.number_field :number, :class => 'input-mini' %>
+		<%= f.number_field :number, :class => 'input-super-mini' %>
 	</div>
 	<div class="span1">
-		<%= f.number_field :quantity, :class => 'input-mini' %>
+		<%= f.number_field :quantity, :class => 'input-super-mini', 
+		:id_line => form_tag_id(f.object_name, ""),
+		:onchange => "calculate_amount(this.id)" %>
 	</div>
 	<div class="span6">
 		<%= f.text_field :detail, :class => 'input-xxlarge' %>
 	</div>
 	<div class="span1">
 
-		<%= f.text_field :price, :class => 'input-mini' %>
+		<%= f.text_field :price, :class => 'input-super-mini input-price', 
+		:id_line => form_tag_id(f.object_name, ""),
+		:onchange => "calculate_amount(this.id)" %>
 	</div>
 
 	<div class="span1">
-<%= f.number_field :markup, :class => 'input-mini' %> %
+
+		<%= f.number_field :markup, :class => 'input-markup', 
+		:id_line => form_tag_id(f.object_name, ""),
+		:onchange => "calculate_amount(this.id)" %> %
 	</div>
-	
-	<div class="span2" id="<%= f.object_name %>_import">
-		
+
+	<div class="span2" >
+		<%= f.number_field :import, :class => 'input-super-mini', :readonly => true %>
 	</div>
 </div>
-
 
