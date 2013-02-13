@@ -1,0 +1,37 @@
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html =>{:class => "form-horizontal"}) do |f| %>
+<%= devise_error_messages! %>
+
+<legend>
+	Registrarse
+</legend>
+<div class="control-group">
+	<%= f.label :email, nil, :class => "control-label" %>
+	<div class="controls">
+		<%= f.email_field :email, :autofocus => true %>
+	</div>
+</div>
+
+<div class="control-group">
+	<%= f.label :password, "Contraseña", :class => "control-label" %>
+	<div class="controls">
+		<%= f.password_field :password %>
+	</div>
+</div>
+
+<div class="control-group">
+	<%= f.label :password_confirmation, "Repetir Contraseña", :class => "control-label" %>
+	<div class="controls">
+		<%= f.password_field :password_confirmation %>
+	</div>
+</div>
+
+<div class="control-group">
+	<div class="controls">
+		<button type="submit" class="btn btn-primary">
+			Registrarse
+		</button>
+	</div>
+</div>
+<% end %>
+
+<%= render "devise/shared/links" %>
