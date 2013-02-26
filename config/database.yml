@@ -20,7 +20,7 @@ development:
   database: licitaciones_development
   pool: 5
   username: root
-  password: 
+  password: Pepe.luis
   host: localhost
 
 # Warning: The database defined as "test" will be erased and
@@ -32,7 +32,7 @@ test:
   database: licitaciones_test
   pool: 5
   username: root
-  password: 
+  password: Pepe.luis
   host: localhost
 
 production:
@@ -41,5 +41,5 @@ production:
   database: licitaciones_production
   pool: 5
   username: root
-  password: 
+  password: Pepe.luis
   host: localhost
