@@ -9,7 +9,7 @@
       <th>Número de file</th>
       <th>Nro privado</th>
       <th>Fecha</th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th>Acciones</th>
     </tr>
   </thead>
   <tbody>
@@ -20,12 +20,17 @@
         <td><%= budget.private_number %></td>
         <td><%= budget.date %></td>
         <td>
+        	<%= link_to t(:show, :default => t("helpers.links.show")),
+                     budget_path(budget), :class => 'btn btn-mini btn-info' %>
           <%= link_to t(:edit, :default => t("helpers.links.edit")),
-                      edit_budget_path(budget), :class => 'btn btn-mini' %>
+                      edit_budget_path(budget), :class => 'btn btn-mini btn-info' %>
+                      <%= link_to "PDF", {:controller=>"budgets", :action=>"show", 
+                      :id => budget , :format=>'pdf'},{ :class => 'btn btn-mini'} %>
+
           <%= link_to t(:destroy, :default => t("helpers.links.destroy")),
                       budget_path(budget),
                       :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => '¿Estas seguro?')) },
                       :class => 'btn btn-mini btn-danger' %>
         </td>
       </tr>

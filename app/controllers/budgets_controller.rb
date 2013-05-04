@@ -15,9 +15,13 @@ class BudgetsController < ApplicationController
   def show
     @budget = Budget.find(params[:id])
 
+    #respond_to do |format|
+    #  format.html # show.html.erb
+    #  format.json { render json: @budget }
+    #end
+
     respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @budget }
+      format.pdf { render :layout => false }
     end
   end
 
@@ -42,13 +46,13 @@ class BudgetsController < ApplicationController
   def create
     @budget = Budget.new(params[:budget])
     if params[:commit] == 'Guardar'
-        action = "new"
+      action = "new"
     elsif params[:commit] == 'Guardar y Salir'
-        action = "index"
+      action = "index"
     end
     respond_to do |format|
       if @budget.save
-        format.html { render action: action, notice: 'Budget was successfully created.' }
+        format.html { redirect_to :action => action, notice: 'Budget was successfully created.' }
         format.json { render json: @budget, status: :created, location: @budget }
       else
         format.html { render action: "new" }
@@ -64,7 +68,7 @@ class BudgetsController < ApplicationController
 
     respond_to do |format|
       if @budget.update_attributes(params[:budget])
-        format.html { redirect_to @budget, notice: 'Budget was successfully updated.' }
+        format.html { redirect_to budgets_url, notice: 'Budget was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -82,6 +86,18 @@ class BudgetsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to budgets_url }
       format.json { head :no_content }
+    end
+  end
+
+  def to_pdf
+    output = HelloReport.new.to_pdf
+
+    respond_to do |format|
+    #  format.pdf do
+    #    send_data output, :filename => "hello.pdf",
+    #                      :type => "application/pdf"
+    #  end
+      format.all { render :text => output}
     end
   end
 end

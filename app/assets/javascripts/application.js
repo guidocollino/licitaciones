@@ -27,6 +27,9 @@ function add_fields(link, association, content) {
 	$(link).parent().before(content.replace(regexp, new_id));
 }
 
+$(function() {
+  $('.datepicker').datepicker();
+});
 // app/assets/javascripts/articles.js
 // Parse the JSON response and replace the <form> with the successfully created article
 $('form.new_article').on('ajax:success', function(event, data, status, xhr) {

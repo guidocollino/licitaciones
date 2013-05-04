@@ -3,7 +3,11 @@ FerreteriaScabuzzo::Application.routes.draw do
 
   devise_for :users
 
-  resources :budgets
+  resources :budgets do
+  # Route GET /user/admin_login
+    get 'to_pdf', :on => :collection
+  end
+
   resources :budget_items
 
   # The priority is based upon order of creation:
@@ -55,11 +59,11 @@ FerreteriaScabuzzo::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-   root :to => 'login#index'
+  root :to => 'budgets#index'
 
-  # See how all your routes lay out with "rake routes"
+# See how all your routes lay out with "rake routes"
 
-  # This is a legacy wild controller route that's not recommended for RESTful applications.
-  # Note: This route will make all actions in every controller accessible via GET requests.
-  # match ':controller(/:action(/:id))(.:format)'
+# This is a legacy wild controller route that's not recommended for RESTful applications.
+# Note: This route will make all actions in every controller accessible via GET requests.
+# match ':controller(/:action(/:id))(.:format)'
 end

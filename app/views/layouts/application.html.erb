@@ -10,25 +10,30 @@
 
 		<div class="navbar navbar-fixed-top">
 			<div class="navbar-inner">
-					
-					<a class="brand" href="#">Ferreteria Scabuzzo</a>
-					<div class="nav-collapse">
-						<ul class="nav pull-left">
-							<li>
-								<%= link_to "Presupuestos", budgets_path %>
-							</li>
-							<li>
-								<%= link_to "Usuarios", budgets_path %>
-							</li>
-						</ul>
-					</div>
-					<div class="nav-collapse">
-						<ul class="nav pull-right">
-							<li>
-								<%= link_to "Cerrar sesión" %>
-							</li>
-						</ul>
-					</div>
+
+				<a class="brand" href="#">Ferreteria Scabuzzo</a>
+				<div class="nav-collapse">
+					<ul class="nav pull-left">
+						<li>
+							<%= link_to "Presupuestos", budgets_path %>
+						</li>
+						<li>
+							<%= link_to "Usuarios", budgets_path %>
+						</li>
+					</ul>
+				</div>
+				<div class="nav-collapse">
+					<ul class="nav pull-right">
+						<% if user_signed_in? %>
+						<li>
+							<%= current_user.email %>
+						</li>
+						<li>
+							<%= link_to('Cerrar sesión', destroy_user_session_path, :method => :delete) %>    
+						</li>
+						<% end %>
+					</ul>
+				</div>
 			</div>
 		</div>
 

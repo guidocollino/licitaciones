@@ -1,4 +1,5 @@
 es:
+  show: "Mostrar"
   edit: "Editar"
   destroy: "Borrar"
   new: "Nueva"

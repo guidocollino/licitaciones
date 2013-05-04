@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130210205157) do
+ActiveRecord::Schema.define(:version => 20130501225648) do
 
   create_table "budget_items", :force => true do |t|
     t.integer  "quantity"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(:version => 20130210205157) do
     t.string   "with_payment"
     t.string   "file_number"
     t.string   "private_number"
-    t.string   "opening"
+    t.datetime "opening"
     t.date     "date"
     t.string   "offer"
     t.string   "delivery"
