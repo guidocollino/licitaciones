@@ -42,7 +42,7 @@ class Budget < ActiveRecord::Base
       [{:content => "Registro Proveedor Provincia de Buenos Aires N 655", :colspan => 4, :align => :center}],
       [{:content => "Señores", :rowspan => 2},{:content => customer, :rowspan => 2}, "Exp N°" , file_number],
       ["L. Privada N°", private_number],
-      [{:content => "Calle", :rowspan => 2},{:content => street, :rowspan => 2}, "Apertura" , opening],
+      [{:content => "Calle", :rowspan => 2},{:content => street, :rowspan => 2}, "Apertura" , format_opening],
       ["Manetenim. Oferta", offer],
       ["Localidad",locality, "Plazo de Entrega" , delivery],
       ["Cond. Pago", with_payment, "Lugar de entrega", place_of_delivery]
@@ -59,6 +59,10 @@ class Budget < ActiveRecord::Base
   
   def format_date
     date.strftime("%d/%m/%Y") unless date.blank?
+  end
+  
+  def format_opening
+    opening.strftime("%d/%m/%Y %H:%M") unless opening.blank?
   end
   
   def pdf_name
