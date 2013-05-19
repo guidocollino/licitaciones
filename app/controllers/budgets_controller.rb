@@ -52,7 +52,7 @@ class BudgetsController < ApplicationController
     end
     respond_to do |format|
       if @budget.save
-        format.html { render action: action, notice: 'El presuuesto se creo con éxito' }
+        format.html { render action: action, notice: 'Se ha creado un nuevo presupuesto' }
         format.json { render json: @budget, status: :created, location: @budget }
       else
         format.html { render action: "new" }
