@@ -18,10 +18,8 @@
         <td><%= budget.customer %></td>
         <td><%= budget.file_number %></td>
         <td><%= budget.private_number %></td>
-        <td><%= budget.date %></td>
+        <td><%= budget.format_date %></td>
         <td>
-        	<%= link_to t(:show, :default => t("helpers.links.show")),
-                     budget_path(budget), :class => 'btn btn-mini btn-info' %>
           <%= link_to t(:edit, :default => t("helpers.links.edit")),
                       edit_budget_path(budget), :class => 'btn btn-mini btn-info' %>
                       <%= link_to "PDF", {:controller=>"budgets", :action=>"show", 

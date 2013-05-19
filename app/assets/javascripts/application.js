@@ -15,20 +15,24 @@
 //= require twitter/bootstrap
 //= require_tree .
 //= require jquery.ui.all
+//= require maskedinput
+//= require rails.validations
 
 function remove_fields(link) {
-	$(link).prev("input[type=hidden]").val("1");
-	$(link).closest(".fields").hide();
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).closest(".row-fluid").hide();
 }
 
 function add_fields(link, association, content) {
 	var new_id = new Date().getTime();
 	var regexp = new RegExp("new_" + association, "g");
-	$(link).parent().before(content.replace(regexp, new_id));
+	$("#items").append(content.replace(regexp, new_id));
 }
 
 $(function() {
-  $('.datepicker').datepicker();
+  $(".date").mask("99/99/9999");
+  $(".time").mask("99/99/9999 99:99");
+
 });
 // app/assets/javascripts/articles.js
 // Parse the JSON response and replace the <form> with the successfully created article
@@ -60,7 +64,7 @@ function get_markup(id_line) {
 function calculate_amount(id) {
 	input_price = $("#" + id);
 	var id_line = input_price.attr('id_line');
-	var price = parseInt($("#" + id_line + "price").val(), 10) ;
+	var price = parseFloat($("#" + id_line + "price").val(), 10) ;
 	var quantity = parseInt($("#" + id_line + "quantity").val(), 10);
 	var markup = get_markup(id_line);
 	var coeff = (markup / 100) + 1;

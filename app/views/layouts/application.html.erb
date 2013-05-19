@@ -13,6 +13,7 @@
 
 				<a class="brand" href="#">Ferreteria Scabuzzo</a>
 				<div class="nav-collapse">
+					<% if user_signed_in? %>
 					<ul class="nav pull-left">
 						<li>
 							<%= link_to "Presupuestos", budgets_path %>
@@ -21,6 +22,7 @@
 							<%= link_to "Usuarios", budgets_path %>
 						</li>
 					</ul>
+					<% end %>
 				</div>
 				<div class="nav-collapse">
 					<ul class="nav pull-right">

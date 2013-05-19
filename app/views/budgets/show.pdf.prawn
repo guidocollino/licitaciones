@@ -1,4 +1,4 @@
-prawn_document(:filename=>'foo.pdf', :page_size=> "A4", :margin => 5) do |pdf|
+prawn_document(:filename=> @budget.pdf_name, :page_size=> "A4", :margin => 5) do |pdf|
 	data_table = @budget.items_to_prawn_table
 	pdf.move_down(10)
 	
@@ -32,7 +32,7 @@ prawn_document(:filename=>'foo.pdf', :page_size=> "A4", :margin => 5) do |pdf|
 		pdf.text "Documento no válido como factura", :size => 9, :align => :center
 		pdf.text "PRESUPUESTO", :size => 9, :align => :center
 		pdf.move_down(30)
-		pdf.text "FECHA: #{@budget.date}", :size => 9, :align => :center
+		pdf.text "FECHA: #{@budget.format_date}", :size => 9, :align => :center
 	end
 	
 	pdf.span(505, :position => 30) do

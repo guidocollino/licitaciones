@@ -5,6 +5,9 @@ class Budget < ActiveRecord::Base
   has_many :budget_items
 
   accepts_nested_attributes_for :budget_items, :allow_destroy => true
+  
+  validates :customer, :presence => true
+  
   def items_to_prawn_table
     items = [[{:content => "Item", :background_color => "000000", :text_color => "FFFFFF", :align => :center},
         {:content => "Cant", :background_color => "000000", :text_color => "FFFFFF", :align => :center},
@@ -22,7 +25,7 @@ class Budget < ActiveRecord::Base
       ])
     }
     items.push([
-      {:content => "Son pesos:", :colspan => 3, :borders => [:top, :left, :bottom]},
+      {:content => "Son pesos: #{total_import_with_markup.to_words.capitalize}", :colspan => 3, :borders => [:top, :left, :bottom]},
       {:content => "TOTAL $", :align => :right, :borders => [:top, :bottom]},
       {:content => "#{total_import_with_markup}", :align => :center, :borders => [:top, :right, :bottom]}])
     items.push([
@@ -47,6 +50,18 @@ class Budget < ActiveRecord::Base
   end
 
   def total_import_with_markup
-    BudgetItem.sum(:import, :conditions => "budget_id = #{self.id}")
+    if self.new_record?() then
+      return 0
+    else
+      return BudgetItem.sum(:import, :conditions => "budget_id = #{self.id}")
+    end
+  end
+  
+  def format_date
+    date.strftime("%d/%m/%Y") unless date.blank?
+  end
+  
+  def pdf_name
+    "#{customer.gsub(" ", '_')   }_#{DateTime.now.strftime("%Y%m%d%H%M%S")}"
   end
 end

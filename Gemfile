@@ -20,17 +20,19 @@ group :assets do
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
-  gem 'therubyracer'
-  gem 'less-rails'
-  gem 'jquery-ui-rails'
-  gem 'twitter-bootstrap-rails'
+  gem 'thin'
   
 end
 
+gem 'uglifier', '>= 1.0.3'
+gem 'therubyracer'
+gem 'less-rails'
+gem 'jquery-ui-rails'
+gem 'twitter-bootstrap-rails'
 gem 'jquery-rails'
-
+gem 'maskedinput-rails'
+gem 'number_to_words', :git => 'https://github.com/mexpolk/number_to_words.git'
+gem 'client_side_validations'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

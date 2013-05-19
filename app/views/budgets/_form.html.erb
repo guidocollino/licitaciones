@@ -1,4 +1,4 @@
-<%= form_for @budget, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @budget, :html => { :class => 'form-horizontal' }, :validate => true do |f| %>
 <fieldset>
 	<legend>
 		Datos generales
@@ -17,7 +17,7 @@
 			<div class="control-group">
 				<%= f.label "Fecha", :class => 'control-label' %>
 				<div class="controls">
-					<%= f.text_field :date, :class => 'input-small datepicker' %>
+					<%= f.text_field :date, :class => 'input-small date' %>
 				</div>
 			</div>
 		</div>
@@ -98,7 +98,7 @@
 			<div class="control-group">
 				<%= f.label "Apertura", :class => 'control-label' %>
 				<div class="controls">
-					<%= f.text_field :opening, :class => 'datepicker text_field' %>
+					<%= f.text_field :opening, :class => 'time text_field' %>
 				</div>
 			</div>
 		</div>
@@ -117,7 +117,8 @@
 	<legend>
 		Items
 	</legend>
-	<div class="row-fluid">
+	
+	 <div class="row-fluid">
 		<div class="span1">
 			Item
 		</div>
@@ -136,13 +137,17 @@
 		<div class="span2">
 			Importe
 		</div>
+	 </div>
+	
+	<div id="items">
+		<%= f.fields_for :budget_items do |f_item| %>
+			<%= render :partial => "budget_item_fields", :locals => {:f => f_item} %>
+		<% end %>
 	</div>
-	<%= f.fields_for :budget_items do |f_item| %>
-	<%= render :partial => "budget_item_fields", :locals => {:f => f_item} %>
-	<% end %>
-
-	<div class="row-fluid">
-		<span class="span12 button-adds" id="buttons"> <%= link_to_add_fields content_tag(:i,nil, :class => "icon-plus-sign") + " item", f, :budget_items %> </span>
+	<div id="buttons" class="row-fluid">
+		<span class="span9 button-adds" > <%= link_to_add_fields content_tag(:i,nil, :class => "icon-plus-sign") + " item", f, :budget_items %> </span>
+		<span class="span1"> Total </span>
+		<span class="span2"> <%= @budget.total_import_with_markup %> </span>
 	</div>
 	
 
@@ -150,7 +155,10 @@
 <div class="form-actions">
 	<%= f.submit "Guardar", :class => 'btn btn-primary' %>
 	<%= f.submit "Guardar y Salir", :class => 'btn btn btn-inverse' %>
-	<%= link_to "Salir",
-	budgets_path, :class => 'btn' %>
+	<%= link_to "Salir", budgets_path, :class => 'btn' %>
+	<% unless @budget.new_record? %>
+	 <%= link_to "PDF", {:controller=>"budgets", :action=>"show", 
+                      :id => @budget , :format=>'pdf'},{ :class => 'btn btn-danger'} %>
+    <% end %>
 </div>
 <% end %>

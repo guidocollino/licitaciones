@@ -26,6 +26,8 @@
 
 	<div class="span2" >
 		<%= f.number_field :import, :class => 'input-super-mini', :readonly => true %>
+		<%= link_to_remove_fields content_tag(:i,nil, :class => "icon-minus-sign"), f %> 
+
 	</div>
 </div>
 
