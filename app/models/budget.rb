@@ -39,7 +39,7 @@ class Budget < ActiveRecord::Base
 
   def data_to_prawn_table
     table = [
-      [{:content => "Registro Proveedor Provincia de Buenos Aires N 655", :colspan => 4, :align => :center}],
+      [{:content => "Registro Proveedor Provincia de Buenos Aires N 100228", :colspan => 4, :align => :center}],
       [{:content => "Señores", :rowspan => 2},{:content => customer, :rowspan => 2}, "Exp N°" , file_number],
       ["L. Privada N°", private_number],
       [{:content => "Calle", :rowspan => 2},{:content => street, :rowspan => 2}, "Apertura" , format_opening],
@@ -62,7 +62,7 @@ class Budget < ActiveRecord::Base
   end
   
   def format_opening
-    opening.strftime("%d/%m/%Y %H:%M") unless opening.blank?
+    opening.strftime("%d/%m/%Y %H:%erM") unless opening.blank?
   end
   
   def pdf_name
