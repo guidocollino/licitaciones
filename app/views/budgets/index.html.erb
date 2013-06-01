@@ -1,8 +1,14 @@
 <%- model_class = Budget -%>
 <div class="page-header">
-  <h3>Presupuestos</h3>
+  <h3>
+  	Presupuestos
+  	<%= link_to t(:new, :default => t("helpers.links.new")),
+            new_budget_path,
+            :class => 'btn btn-custom' %>
+  	</h3>
 </div>
-<table class="table table-striped">
+
+<table class="table table-striped datatable">
   <thead>
     <tr>
       <th>Cliente</th>
@@ -36,6 +42,4 @@
   </tbody>
 </table>
 
-<%= link_to t(:new, :default => t("helpers.links.new")),
-            new_budget_path,
-            :class => 'btn btn-custom' %>
+

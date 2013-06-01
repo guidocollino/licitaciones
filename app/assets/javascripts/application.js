@@ -17,6 +17,8 @@
 //= require jquery.ui.all
 //= require maskedinput
 //= require rails.validations
+//= require dataTables/jquery.dataTables
+//= require dataTables/jquery.dataTables.bootstrap
 
 function remove_fields(link) {
   $(link).prev("input[type=hidden]").val("1");
@@ -76,4 +78,31 @@ function recalculate_amounts() {
 		calculate_amount($(this).attr('id'));
 	});
 }
+
+$(document).ready(function() {
+    $('.datatable').dataTable({
+    	"iDisplayLength": 50,
+    	"oLanguage": {
+			"sProcessing": "Procesando...",
+			"sLengthMenu": "Mostrar _MENU_ registros",
+			"sZeroRecords": "No se encontraron resultados",
+			"sInfo": "Mostrando desde _START_ hasta _END_ de _TOTAL_ registros",
+			"sInfoEmpty": "Mostrando desde 0 hasta 0 de 0 registros",
+			"sInfoFiltered": "(filtrado de _MAX_ registros en total)",
+			"sInfoPostFix": "",
+			"sSearch": "Buscar:",
+			"sUrl": "",
+			"oPaginate": {
+				"sFirst": "Primero",
+				"sPrevious": "Anterior",
+				"sNext": "Siguiente",
+				"sLast": "Último"
+			}
+		},
+		"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+  		"sPaginationType": "bootstrap"
+  	});
+  	
+  	
+} );
 

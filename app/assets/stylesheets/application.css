@@ -11,6 +11,8 @@
  *= require_self
  *= require_tree .
  *= require jquery.ui.all
+ *= require dataTables/jquery.dataTables
+ *= require dataTables/jquery.dataTables.bootstrap
  */
 #button-add-item {
   margin-top: 35px;

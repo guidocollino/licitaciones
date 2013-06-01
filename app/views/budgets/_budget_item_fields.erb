@@ -1,3 +1,13 @@
+<script type="teext/javascript" ">
+	
+	$(function() {
+	    $( ".detail-input" ).autocomplete({
+			source: "<%= url_for(:controller => :budgets, :action => :names_budget_items) %>",
+			minLength: 2
+		});
+	});
+</script>
+
 <div class="row-fluid">
 	<div class="span1">
 		<%= f.number_field :number, :class => 'input-super-mini' %>
@@ -8,7 +18,7 @@
 		:onchange => "calculate_amount(this.id)" %>
 	</div>
 	<div class="span6">
-		<%= f.text_field :detail, :class => 'input-xxlarge' %>
+		<%= f.text_field :detail, :class => 'input-xxlarge detail-input' %>
 	</div>
 	<div class="span1">
 

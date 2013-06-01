@@ -6,6 +6,7 @@ FerreteriaScabuzzo::Application.routes.draw do
   resources :budgets do
   # Route GET /user/admin_login
     get 'to_pdf', :on => :collection
+    get 'names_budget_items', :on => :collection
   end
 
   resources :budget_items

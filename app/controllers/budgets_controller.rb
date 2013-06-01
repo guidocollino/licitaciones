@@ -97,14 +97,17 @@ class BudgetsController < ApplicationController
   end
 
   def to_pdf
-    output = HelloReport.new.to_pdf
-
+    output = HelloReeport.new.to_pdf
     respond_to do |format|
-    #  format.pdf do
-    #    send_data output, :filename => "hello.pdf",
-    #                      :type => "application/pdf"
-    #  end
       format.all { render :text => output}
+    end
+  end
+  
+  def names_budget_items
+    names_budget_items = BudgetItem.find(:all, :select => "detail", :conditions=> ["detail like ?", "%#{params[:term]}%"])
+    names_budget_items = names_budget_items.collect { |item| item.detail  }
+    respond_to do |format|
+        format.json { render json: names_budget_items }
     end
   end
 end
