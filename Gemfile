@@ -33,7 +33,7 @@ gem 'jquery-rails'
 gem 'maskedinput-rails'
 gem 'number_to_words', :git => 'https://github.com/mexpolk/number_to_words.git'
 gem 'client_side_validations'
-gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
+gem 'jquery-datatables-rails', :git => 'git://github.com/rweng/jquery-datatables-rails.git'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
