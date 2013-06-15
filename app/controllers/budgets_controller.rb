@@ -104,7 +104,7 @@ class BudgetsController < ApplicationController
   end
   
   def names_budget_items
-    names_budget_items = BudgetItem.find(:all, :select => "detail", :conditions=> ["detail like ?", "%#{params[:term]}%"])
+    names_budget_items = BudgetItem.find(:all, :select => "DISTINCT(detail)", :conditions=> ["detail like ?", "%#{params[:term]}%"])
     names_budget_items = names_budget_items.collect { |item| item.detail  }
     respond_to do |format|
         format.json { render json: names_budget_items }

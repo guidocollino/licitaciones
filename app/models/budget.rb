@@ -53,7 +53,7 @@ class Budget < ActiveRecord::Base
     if self.new_record?() then
       return 0
     else
-      return BudgetItem.sum(:import, :conditions => "budget_id = #{self.id}")
+      return BudgetItem.sum(:import, :conditions => "budget_id = #{self.id}").round(2)
     end
   end
   
