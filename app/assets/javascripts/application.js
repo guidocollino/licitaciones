@@ -70,7 +70,8 @@ function calculate_amount(id) {
 	var quantity = parseInt($("#" + id_line + "quantity").val(), 10);
 	var markup = get_markup(id_line);
 	var coeff = (markup / 100) + 1;
-	$("#" + id_line + "import").attr('value', (price * quantity) * coeff);
+	var price_with_markup = ((price * quantity) * coeff).toFixed(2);
+	$("#" + id_line + "import").attr('value', price_with_markup);
 }
 
 function recalculate_amounts() {
