@@ -80,6 +80,21 @@ function recalculate_amounts() {
 	});
 }
 
+jQuery.extend( jQuery.fn.dataTableExt.oSort, {
+"date-uk-pre": function ( a ) {
+    var ukDatea = a.split('/');
+    return (ukDatea[2] + ukDatea[1] + ukDatea[0]) * 1;
+},
+
+"date-uk-asc": function ( a, b ) {
+    return ((a < b) ? -1 : ((a > b) ? 1 : 0));
+},
+
+"date-uk-desc": function ( a, b ) {
+    return ((a < b) ? 1 : ((a > b) ? -1 : 0));
+}
+} );
+
 $(document).ready(function() {
     $('.datatable').dataTable({
     	"iDisplayLength": 50,
@@ -101,7 +116,14 @@ $(document).ready(function() {
 			}
 		},
 		"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-  		"sPaginationType": "bootstrap"
+  		"sPaginationType": "bootstrap",
+  		"aoColumns": [
+            null,
+            null,
+            null,
+            { "sType": "date-uk" },  
+            { "bSortable": false }
+        ]
   	});
   	
   	

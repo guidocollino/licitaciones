@@ -1,5 +1,6 @@
 # encoding: UTF-8
 class Budget < ActiveRecord::Base
+  include ActionView::Helpers::NumberHelper
   attr_accessible :customer, :date, :delivery, :file_number, :general_markup, :locality, :offer, :opening, :place_of_delivery, :private_number, :street, :with_payment
   attr_accessible :budget_items_attributes
   has_many :budget_items
@@ -20,14 +21,14 @@ class Budget < ActiveRecord::Base
         {:content => "#{item.number}", :width => 10, :align => :center },
         {:content => "#{item.quantity}", :width => 10, :align => :center },
         {:content => "#{item.detail}", :width => 325 },
-        {:content => "#{ item.import_with_markup}", :align => :center},
-        {:content => "#{ item.import_per_cant}", :align => :center}
+        {:content => "#{ format_price(item.import_with_markup)}", :align => :center},
+        {:content => "#{ format_price(item.import_per_cant)}", :align => :center}
       ])
     }
     items.push([
       {:content => "Son pesos: #{total_import_with_markup.to_words.capitalize}", :colspan => 3, :borders => [:top, :left, :bottom]},
       {:content => "TOTAL $", :align => :right, :borders => [:top, :bottom]},
-      {:content => "#{total_import_with_markup}", :align => :center, :borders => [:top, :right, :bottom]}])
+      {:content => "#{format_price(total_import_with_markup)}", :align => :center, :borders => [:top, :right, :bottom]}])
     items.push([
       {:content => "Nota: Una vez vencido el plazo de mantenimiento de oferta el mismo no se prorroga sin previo aviso",
          :colspan => 5,:align => :center}])
@@ -55,6 +56,10 @@ class Budget < ActiveRecord::Base
     else
       return BudgetItem.sum(:import, :conditions => "budget_id = #{self.id}").round(2)
     end
+  end
+  
+  def format_price(price)
+    "%g" % ("%.2f" % price) unless price.blank?
   end
   
   def format_date

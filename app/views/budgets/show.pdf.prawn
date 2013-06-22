@@ -15,6 +15,7 @@ prawn_document(:filename=> @budget.pdf_name, :page_size=> "A4", :margin => 5) do
 	pdf.bounding_box([10, 770], :width => 200, :height => 70) do
 		pdf.text "     FERRETERIA - PINTURERIA - BAZAR", :size => 11
 		pdf.text "Av. 7 N° 220 e/36 y 37 - Tel (0221) 4212800. 1900 LA PLATA", :size => 7
+		pdf.text "ferreteriascabuzzo@hotmail.com", :size => 8, :align => :center
 		pdf.move_down(10)
 		pdf.text "IVA RESPONSABLE INSCRIPTO", :align => :center, :size => 10
 	end
