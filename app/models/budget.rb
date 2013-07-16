@@ -6,9 +6,8 @@ class Budget < ActiveRecord::Base
   has_many :budget_items
 
   accepts_nested_attributes_for :budget_items, :allow_destroy => true
-  
+
   validates :customer, :presence => true
-  
   def items_to_prawn_table
     items = [[{:content => "Item", :background_color => "000000", :text_color => "FFFFFF", :align => :center},
         {:content => "Cant", :background_color => "000000", :text_color => "FFFFFF", :align => :center},
@@ -20,20 +19,19 @@ class Budget < ActiveRecord::Base
       items.push([
         {:content => "#{item.number}", :width => 10, :align => :center },
         {:content => "#{item.quantity}", :width => 10, :align => :center },
-        {:content => "#{item.detail}", :width => 325 },
+        {:content => "#{item.detail}", :width => 315 },
         {:content => "#{ format_price(item.import_with_markup)}", :align => :center},
         {:content => "#{ format_price(item.import_per_cant)}", :align => :center}
       ])
     }
     items.push([
-      {:content => "Son pesos: #{total_import_with_markup.to_words.capitalize}", :colspan => 3, :borders => [:top, :left, :bottom]},
-      {:content => "TOTAL $", :align => :right, :borders => [:top, :bottom]},
-      {:content => "#{format_price(total_import_with_markup)}", :align => :center, :borders => [:top, :right, :bottom]}])
+      {:content => "Son pesos: #{text_total}", :colspan => 3, :borders => [:top, :left, :bottom]},
+      {:content => "TOTAL $ #{format_price(total_import_with_markup)}", :colspan => 2, :align => :center, :borders => [:top, :right, :bottom] }])
     items.push([
       {:content => "Nota: Una vez vencido el plazo de mantenimiento de oferta el mismo no se prorroga sin previo aviso",
-         :colspan => 5,:align => :center}])
+        :colspan => 5,:align => :center}])
     items.push([
-      {:content => "Manifiesto aceptar y conocer el pliego de bases y condiciones que rige el presente acto como asi tambien todas las modificaciones y me remito a la justicio de la Provincia de Buenos Aires", 
+      {:content => "Manifiesto aceptar y conocer el pliego de bases y condiciones que rige el presente acto como asi tambien todas las modificaciones y me remito a la justicio de la Provincia de Buenos Aires",
         :colspan => 5,:align => :center}])
     items
   end
@@ -52,25 +50,40 @@ class Budget < ActiveRecord::Base
 
   def total_import_with_markup
     if self.new_record?() then
-      return 0
+    return 0
     else
       return BudgetItem.sum(:import, :conditions => "budget_id = #{self.id}").round(2)
     end
   end
-  
+
   def format_price(price)
-    "%g" % ("%.2f" % price) unless price.blank?
+    rounded = price.to_i
+    if price == rounded
+      return "%g" % price
+    else
+      return "%.02f" % price
+    end
+  #"%g" % ("%.2f" % price) unless price.blank?
   end
-  
+
   def format_date
     date.strftime("%d/%m/%Y") unless date.blank?
   end
-  
+
   def format_opening
     opening.strftime("%d/%m/%Y %H:%M") unless opening.blank?
   end
-  
+
   def pdf_name
     "#{customer.gsub(" ", '_')   }_#{DateTime.now.strftime("%Y%m%d%H%M%S")}"
   end
+  
+  def text_total
+    total_price = format_price(total_import_with_markup)
+    parts = total_price.split(".",2)
+    text = parts[0].to_i.to_words
+    text += " con #{parts[1].to_i.to_words} centavos" unless parts[1].nil?
+    return text.capitalize
+  end
+  
 end
