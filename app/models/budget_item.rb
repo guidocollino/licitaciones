@@ -12,7 +12,7 @@ class BudgetItem < ActiveRecord::Base
   end
   
   def import_with_markup
-    return self.price * coeff
+    return (self.price * coeff).round(2)
   end
   
   def import_per_cant
