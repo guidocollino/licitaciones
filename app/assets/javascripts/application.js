@@ -72,8 +72,6 @@ function calculate_amount(id) {
 	var coeff = (markup / 100) + 1;
 	var price_with_markup = (price * coeff).toFixed(2);
 	var total_price = (price_with_markup * quantity);
-	alert(price_with_markup);
-	alert(total_price);
 	$("#" + id_line + "import").attr('value', total_price);
 }
 
